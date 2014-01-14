@@ -14,3 +14,5 @@ LoLlib also contains helper classes which helps make sense of various constants 
     if (game.getMapId() == MapType.SUMMONERS_RIFT_SUMMER.get()) {
          System.out.println("Played on summer map!");
     }
+    
+Documentation of LoLlib can be found here: http://waverunner.github.io/LoLlib/doc
