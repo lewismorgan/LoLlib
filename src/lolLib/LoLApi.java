@@ -3,6 +3,7 @@ package lolLib;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import lolLib.objects.champion.Champion;
 import lolLib.objects.champion.ChampionList;
 import lolLib.objects.game.RecentGames;
 import lolLib.objects.masteries.MasteryPages;
+import lolLib.objects.stats.PlayerStatsSummaryList;
 
 public class LoLApi {
 
@@ -44,6 +46,10 @@ public class LoLApi {
 		try {
 			
 			URL url = new URL(sUrl);
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			if (connection.getResponseCode() != 200) {
+				throw new IOException(connection.getResponseCode() + " error while retrieving data from " + url.toString());
+			}
 			reader = new BufferedReader(new InputStreamReader(url.openStream()));
 			StringBuffer buffer = new StringBuffer();
 			int read;
@@ -197,6 +203,11 @@ public class LoLApi {
 	public List<Champion> getFreeChampions() {
 		ChampionList freeChamps = gson.fromJson(request("champion?freeToPlay=true", "v1.1", true), ChampionList.class);
 		return freeChamps.getChampions();
+	}
+	
+	public PlayerStatsSummaryList getPlayerStatsSummary(long summonerId) {
+		PlayerStatsSummaryList summary = gson.fromJson(request("stats/by-summoner/" + summonerId + "/summary", "v1.2"), PlayerStatsSummaryList.class);
+		return summary;
 	}
 	
 	public static LoLApi getInstance() {
