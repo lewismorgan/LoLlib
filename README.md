@@ -15,4 +15,9 @@ LoLlib also contains helper classes which helps make sense of various constants 
          System.out.println("Played on summer map!");
     }
     
+You can use DataDragon to retrieve images from http://ddragon.leagueoflegends.com/. All that you have to do is simply call a new instance of DataDragon with the game version that you want to retrieve an image from.
+
+    DataDragon dd = new DataDragon("4.1.2");
+Currently you can retrieve only images from DataDragon.
+
 Documentation of LoLlib can be found here: http://waverunner.github.io/LoLlib/doc
