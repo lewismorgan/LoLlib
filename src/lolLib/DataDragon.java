@@ -60,6 +60,8 @@ public class DataDragon {
 		return null;
 	}
 	
+	// JSON Data: http://ddragon.leagueoflegends.com/cdn/4.1.2/data/en_US/champion/Ahri.json
+	
 	public String getGameVersion() {
 		return gameVersion;
 	}
